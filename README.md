@@ -4,4 +4,4 @@ Congratulations! You've decided to treat yourself to a long holiday vacation in 
 The following sections outline the steps that you need to take to accomplish this task.                      
 
 Resources, like csv files and sql lite files are in the 'resources' folder.                   
-Code is in the folder named 'Surf's Up'
+Code is contained in two separate files  : climate_working.ipynb for the first part and app.py for the second part.
