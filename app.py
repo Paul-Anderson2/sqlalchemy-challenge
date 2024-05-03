@@ -58,29 +58,29 @@ app = Flask(__name__)
 # Flask Routes
 #################################################
 
-# Find the most recent date in the data set.
 
 
-#1. '/'
-#   - Start at the homepage.
+
+
+#   - Start at the landing page/welcome page
 #   - List all the available routes.
 
 @app.route("/")
 def welcome():
     return (
-        f"Welcome to the Hawaii Climate Analysis API!<br/>"
+        f"Welcome to the HI Climate Analysis API!<br/>"
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
         f"/api/v1.0/start (enter as YYYY-MM-DD)<br/>"
-        f"/api/v1.0/start/end (enter as YYYY-MM-DD/YYYY-MM-DD)"
+        f"/api/v1.0/start/end (enter as YYYY-MM-DD/YY-MM-DD)"
 
     )
 
 #2. /api/v1.0/precipitation
 #   - Convert the query results from your precipitation analysis (i.e. retrieve only the last 12 months of data) to a dictionary 
-# using date as the key and prcp as the value.
+#     using date as the key and prcp as the value
 #   - Return the JSON representation of your dictionary.
 
 @app.route("/api/v1.0/precipitation")
@@ -130,7 +130,7 @@ def stations():
 
 #4. /api/v1.0/tobs
 #   - Query the dates and temperature observations of the most-active station for the previous year of data.
-#   - Return a JSON list of temperature observations for the previous year.
+#   - Return a JSON list of temperature observations (tobs) for the previous year.
 
 @app.route("/api/v1.0/tobs")
 def tobs():
@@ -156,9 +156,11 @@ def tobs():
 #5. /api/v1.0/<start> and /api/v1.0/<start>/<end>
 #   - Return a JSON list of the minimum temperature, the average temperature, and the maximum temperature for a specified start or start-end range.
 #   - For a specified start, calculate TMIN, TAVG, and TMAX for all the dates greater than or equal to the start date.
+#   - for the start date, use this format, date is an example for start date June 1 2017 : http://127.0.0.1:5000/api/v1.0/2017-06-01 
 #   - For a specified start date and end date, calculate TMIN, TAVG, and TMAX for the dates from the start date to the end date, inclusive.
-
-
+#   - for the start and end dates, use this format : http://127.0.0.1:5000/api/v1.0/2017-06-01/2017-07-01
+#   - the example above would return avg, max, and min temps for June 1 2017 thru July 1, 2017
+#   - Putting in no dates, should return a [null,null,null] result. 
 
 @app.route("/api/v1.0/<start>")
 
@@ -196,11 +198,13 @@ def get_temps_start_end(start, end):
 
     return jsonify(temps)
 
-
+# When running this code, you should be able to open the URL given in the output
+# Adding apit routes as defined
 
 
 
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
+
